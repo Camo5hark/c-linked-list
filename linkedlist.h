@@ -1,11 +1,17 @@
 #ifndef LINKEDLIST_HEADER
 #define LINKEDLIST_HEADER
 
+#include <stdlib.h>
+#include <stdio.h>
+
 #ifndef LINKEDLIST_DATA_TYPE
 #include <stdint.h>
 #define LINKEDLIST_DATA_TYPE uint64_t
 #define LINKEDLIST_DATA_TYPE_FORMAT "%llu\n"
 #endif
+
+typedef struct ll_node_t ll_Node;
+typedef struct ll_list_t ll_List;
 
 struct ll_node_t {
   LINKEDLIST_DATA_TYPE data;
@@ -15,9 +21,6 @@ struct ll_node_t {
 struct ll_list_t {
   ll_Node *head;
 };
-
-typedef struct ll_node_t ll_Node;
-typedef struct ll_list_t ll_List;
 
 ll_List *ll_makelist();
 void ll_add(LINKEDLIST_DATA_TYPE data, ll_List *list);
