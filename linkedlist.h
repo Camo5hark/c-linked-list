@@ -1,15 +1,19 @@
 #ifndef LINKEDLIST_HEADER
 #define LINKEDLIST_HEADER
 
+#ifndef LINKEDLIST_DATA_TYPE
 #include <stdint.h>
+#define LINKEDLIST_DATA_TYPE uint64_t
+#define LINKEDLIST_DATA_TYPE_FORMAT "%llu\n"
+#endif
 
 typedef struct node Node;
 
 typedef struct list List;
 
 List *makelist();
-void add(uint64_t data, List *list);
-void delete(uint64_t data, List *list);
+void add(LINKEDLIST_DATA_TYPE data, List *list);
+void delete(LINKEDLIST_DATA_TYPE data, List *list);
 void display(List *list);
 void reverse(List *list);
 void reverse_using_two_pointers(List *list);
@@ -18,7 +22,7 @@ void destroy(List *list);
 #ifdef LINKEDLIST_IMPLEMENTATION
 
 struct node {
-  uint64_t data;
+  LINKEDLIST_DATA_TYPE data;
   struct node *next;
 };
 
@@ -26,8 +30,8 @@ struct list {
   Node *head;
 };
 
-Node *createnode(uint64_t data);
-inline Node *createnode(uint64_t data){
+Node *createnode(LINKEDLIST_DATA_TYPE data);
+inline Node *createnode(LINKEDLIST_DATA_TYPE data){
   Node *newNode = malloc(sizeof(Node));
   if (!newNode) {
     return NULL;
@@ -52,11 +56,11 @@ inline void display(List *list) {
     return;
 
   for(; current != NULL; current = current->next) {
-    printf("%llu\n", current->data);
+    printf(LINKEDLIST_DATA_TYPE_FORMAT, current->data);
   }
 }
 
-inline void add(uint64_t data, List *list){
+inline void add(LINKEDLIST_DATA_TYPE data, List *list){
   Node *current = NULL;
   if(list->head == NULL){
     list->head = createnode(data);
@@ -70,7 +74,7 @@ inline void add(uint64_t data, List *list){
   }
 }
 
-inline void delete(uint64_t data, List *list){
+inline void delete(LINKEDLIST_DATA_TYPE data, List *list){
   Node *current = list->head;
   Node *previous = current;
   while(current != NULL){
