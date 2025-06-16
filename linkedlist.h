@@ -7,32 +7,32 @@
 #define LINKEDLIST_DATA_TYPE_FORMAT "%llu\n"
 #endif
 
-typedef struct node Node;
+typedef struct ll_node_t ll_Node;
 
-typedef struct list List;
+typedef struct ll_list_t ll_List;
 
-List *makelist();
-void add(LINKEDLIST_DATA_TYPE data, List *list);
-void delete(LINKEDLIST_DATA_TYPE data, List *list);
-void display(List *list);
-void reverse(List *list);
-void reverse_using_two_pointers(List *list);
-void destroy(List *list);
+ll_List *ll_makelist();
+void ll_add(LINKEDLIST_DATA_TYPE data, ll_List *list);
+void ll_delete(LINKEDLIST_DATA_TYPE data, ll_List *list);
+void ll_display(ll_List *list);
+void ll_reverse(ll_List *list);
+void ll_reverse_using_two_pointers(ll_List *list);
+void ll_destroy(ll_List *list);
 
 #ifdef LINKEDLIST_IMPLEMENTATION
 
-struct node {
+struct ll_node_t {
   LINKEDLIST_DATA_TYPE data;
-  struct node *next;
+  struct ll_node_t *next;
 };
 
-struct list {
-  Node *head;
+struct ll_list_t {
+  ll_Node *head;
 };
 
-Node *createnode(LINKEDLIST_DATA_TYPE data);
-inline Node *createnode(LINKEDLIST_DATA_TYPE data){
-  Node *newNode = malloc(sizeof(Node));
+ll_Node *ll_createnode(LINKEDLIST_DATA_TYPE data);
+inline ll_Node *ll_createnode(LINKEDLIST_DATA_TYPE data){
+  ll_Node *newNode = malloc(sizeof(ll_Node));
   if (!newNode) {
     return NULL;
   }
@@ -41,8 +41,8 @@ inline Node *createnode(LINKEDLIST_DATA_TYPE data){
   return newNode;
 }
 
-inline List *makelist() {
-  List *list = malloc(sizeof(List));
+inline ll_List *ll_makelist() {
+  ll_List *list = malloc(sizeof(ll_List));
   if (!list) {
     return NULL;
   }
@@ -50,8 +50,8 @@ inline List *makelist() {
   return list;
 }
 
-inline void display(List *list) {
-  Node *current = list->head;
+inline void ll_display(ll_List *list) {
+  ll_Node *current = list->head;
   if(list->head == NULL)
     return;
 
@@ -60,23 +60,23 @@ inline void display(List *list) {
   }
 }
 
-inline void add(LINKEDLIST_DATA_TYPE data, List *list){
-  Node *current = NULL;
+inline void ll_add(LINKEDLIST_DATA_TYPE data, ll_List *list){
+  ll_Node *current = NULL;
   if(list->head == NULL){
-    list->head = createnode(data);
+    list->head = ll_createnode(data);
   }
   else {
     current = list->head;
     while (current->next!=NULL){
       current = current->next;
     }
-    current->next = createnode(data);
+    current->next = ll_createnode(data);
   }
 }
 
-inline void delete(LINKEDLIST_DATA_TYPE data, List *list){
-  Node *current = list->head;
-  Node *previous = current;
+inline void ll_delete(LINKEDLIST_DATA_TYPE data, ll_List *list){
+  ll_Node *current = list->head;
+  ll_Node *previous = current;
   while(current != NULL){
     if(current->data == data){
       previous->next = current->next;
@@ -90,10 +90,10 @@ inline void delete(LINKEDLIST_DATA_TYPE data, List *list){
   }
 }
 
-inline void reverse(List *list){
-  Node *reversed = NULL;
-  Node *current = list->head;
-  Node *temp = NULL;
+inline void ll_reverse(ll_List *list){
+  ll_Node *reversed = NULL;
+  ll_Node *current = list->head;
+  ll_Node *temp = NULL;
   while(current != NULL){
     temp = current;
     current = current->next;
@@ -104,11 +104,11 @@ inline void reverse(List *list){
 }
 
 //Reversing the entire list by changing the direction of link from forward to backward using two pointers
-inline void reverse_using_two_pointers(List *list){
-    Node *previous = NULL;
+inline void ll_reverse_using_two_pointers(ll_List *list){
+    ll_Node *previous = NULL;
     while (list->head)
     {
-        Node *next_node = list->head->next; //points to second node in list
+        ll_Node *next_node = list->head->next; //points to second node in list
         list->head->next = previous;//at initial making head as NULL
         previous = list->head;//changing the nextpointer direction as to point backward node
         list->head = next_node; //moving forward by next node
@@ -116,9 +116,9 @@ inline void reverse_using_two_pointers(List *list){
     list->head=previous;
 }
 
-inline void destroy(List *list){
-  Node *current = list->head;
-  Node *next = current;
+inline void ll_destroy(ll_List *list){
+  ll_Node *current = list->head;
+  ll_Node *next = current;
   while(current != NULL){
     next = current->next;
     free(current);

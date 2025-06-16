@@ -5,31 +5,38 @@
 #include "linkedlist.h"
 
 int main() {
-  List *list = makelist();
-  add(1, list);
-  add(20, list);
-  add(2, list);
-  add(5, list);
-  add(8, list);
-  add(9, list);
-  add(13, list);
-  display(list);
+  ll_List *list = ll_makelist();
+
+  ll_add(1, list);
+  ll_add(20, list);
+  ll_add(2, list);
+  ll_add(5, list);
+  ll_add(8, list);
+  ll_add(9, list);
+  ll_add(13, list);
+  ll_display(list);
   puts("");
-  delete(2, list);
-  display(list);
+
+  ll_delete(2, list);
+  ll_display(list);
   puts("");
-  delete(1, list);
-  display(list);
+
+  ll_delete(1, list);
+  ll_display(list);
   puts("");
-  delete(20, list);
-  display(list);
+
+  ll_delete(20, list);
+  ll_display(list);
   puts("");
-  reverse(list);
+
+  ll_reverse(list);
   printf("Reversed: using three pointers. \n");
-  display(list);
-  reverse_using_two_pointers(list);
+  ll_display(list);
+
+  ll_reverse_using_two_pointers(list);
   printf("Reversed: using to pointers. \n");
-  display(list);
-  destroy(list);
+  ll_display(list);
+
+  ll_destroy(list);
   return 0;
 }
