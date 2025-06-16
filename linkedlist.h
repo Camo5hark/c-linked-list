@@ -7,8 +7,16 @@
 #define LINKEDLIST_DATA_TYPE_FORMAT "%llu\n"
 #endif
 
-typedef struct ll_node_t ll_Node;
+struct ll_node_t {
+  LINKEDLIST_DATA_TYPE data;
+  struct ll_node_t *next;
+};
 
+struct ll_list_t {
+  ll_Node *head;
+};
+
+typedef struct ll_node_t ll_Node;
 typedef struct ll_list_t ll_List;
 
 ll_List *ll_makelist();
@@ -20,15 +28,6 @@ void ll_reverse_using_two_pointers(ll_List *list);
 void ll_destroy(ll_List *list);
 
 #ifdef LINKEDLIST_IMPLEMENTATION
-
-struct ll_node_t {
-  LINKEDLIST_DATA_TYPE data;
-  struct ll_node_t *next;
-};
-
-struct ll_list_t {
-  ll_Node *head;
-};
 
 ll_Node *ll_createnode(LINKEDLIST_DATA_TYPE data);
 inline ll_Node *ll_createnode(LINKEDLIST_DATA_TYPE data){
